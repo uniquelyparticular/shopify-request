@@ -56,7 +56,7 @@ shopify
     .put('admin/products/:product_id.json', {
         product: {
             id: 632910392,
-            tags: 'tag 1, tag 2'
+            tags: 'tag 1, tag 2, tag 3'
         }
     })
     .then(console.log)
