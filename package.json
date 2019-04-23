@@ -1,0 +1,49 @@
+{
+  "name": "@particular./shopify-request",
+  "version": "0.0.0-semantic-release",
+  "author": "Adam Grohs <info@uniquelyparticular.com> (https://uniquelyparticular.com)",
+  "owner": "Particular.",
+  "description": "Please contact Particular. via info@uniquelyparticular.com for any questions",
+  "homepage": "https://github.com/uniquelyparticular/shopify-request#readme",
+  "repository": "github:uniquelyparticular/shopify-request",
+  "keywords": [
+    "shopify",
+    "ecommerce",
+    "api",
+    "node",
+    "typescript",
+    "javascript",
+    "particular",
+    "particular."
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "yarn clean && tsc -d",
+    "clean": "rimraf dist",
+    "test": "jest",
+    "semantic-release": "semantic-release"
+  },
+  "dependencies": {
+    "cross-fetch": "3.0.2"
+  },
+  "devDependencies": {
+    "@types/fetch-mock": "7.2.3",
+    "@types/jest": "24.0.11",
+    "chai": "4.2.0",
+    "fetch-everywhere": "1.0.5",
+    "fetch-mock": "7.3.3",
+    "jest": "24.7.1",
+    "rimraf": "2.6.3",
+    "semantic-release": "15.13.12",
+    "ts-jest": "24.0.2",
+    "typescript": "3.4.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
