@@ -6,6 +6,8 @@
 
 **_NOTE: This should not be used in production as it passes `client_pass` in clear text/basic auth._**
 
+*_OAuth support coming soon - should be used for production!_*
+
 ## Installation
 
 ```bash
