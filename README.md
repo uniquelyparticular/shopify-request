@@ -69,6 +69,7 @@ shopify
 const { createClient } = require('@particular./shopify-request')
 
 const shopify = new createClient({
+    store_name: '...',
     client_key: '...',
     client_pass: '...'
     application: '...',
@@ -90,7 +91,9 @@ By default this library will encode all data as JSON, however you can customise 
 const { createClient } = require('@particular./shopify-request')
 
 const shopify = new createClient({
-  client_secret: '...'
+    store_name: '...',
+    client_key: '...',
+    client_pass: '...'
 })
 
 const headers = {
