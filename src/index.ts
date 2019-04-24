@@ -9,13 +9,15 @@ import {
 import { removeLeadingSlash } from './utils'
 
 export class createClient {
-  private client_key: string
-  private client_pass: string
+  private access_token?: string
+  private client_key?: string
+  private client_pass?: string
   private options?: Options
   public fetch?: Fetch
 
   constructor(options: InitOptions) {
-    const { store_name, client_key, client_pass, ...others } = options
+    const { store_name, access_token, client_key, client_pass, ...others } = options
+    this.access_token = access_token
     this.client_key = client_key
     this.client_pass = client_pass
     this.fetch = options.fetch ? options.fetch : fetch
@@ -46,11 +48,16 @@ export class createClient {
       ...requestHeaders
     }
 
-    const basic_auth = Buffer.from(`${this.client_key}:${this.client_pass}`).toString('base64')
-
-    const headers: Headers = {
+    const headers: Headers = (this.access_token) ? {
       'Content-Type': 'application/json',
-      Authorization: `Basic ${basic_auth}`,
+      Authorization: `Bearer ${this.access_token}`,
+      'X-SHOPIFY-ACCESS-TOKEN': this.access_token,
+      'X-SHOPIFY-SDK-LANGUAGE': 'JS-REQUEST',
+      ...(application && { 'X-SHOPIFY-APPLICATION': application }),
+      ...customHeaders
+    } : {
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${Buffer.from(`${this.client_key}:${this.client_pass}`).toString('base64')}`,
       'api-key': this.client_key,
       'X-API-KEY': this.client_key,
       'X-SHOPIFY-SDK-LANGUAGE': 'JS-REQUEST',
