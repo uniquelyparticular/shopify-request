@@ -4,26 +4,21 @@
 
 > 🎮 Minimal [Shopify](https://www.shopify.com) API request library for Node
 
-**_NOTE: This should not be used in production as it passes `client_pass` in clear text/basic auth._**
-
-*_OAuth support coming soon - should be used for production!_*
-
 ## Installation
 
 ```bash
 yarn add @particular./shopify-request # npm install @particular./shopify-request
 ```
 
-## Quickstart (basic auth)
+## Quickstart (OAuth)
 
 ```js
 const { createClient } = require('@particular./shopify-request')
 // import { createClient } from '@particular./shopify-request'
 
 const shopify = new createClient({
-  store_name: '...'  //Shopify Store Name
-  client_key: '...', //Shopify API Key
-  client_pass: '...' //Shopify API Password
+  store_name: '...',  //Shopify Store Name
+  access_token: '...'  //Shopify OAuth token received after registering as Public App and installing to Store
 })
 
 shopify
@@ -65,14 +60,34 @@ shopify
     .catch(console.error)
 ```
 
+## Quickstart (Basic Auth)
+**_NOTE: This should not be used in production as it passes `client_pass` in base64 encoded clear text using basic auth._**
+
+```js
+const shopify = new createClient({
+  store_name: '...',  //Shopify Store Name
+  client_key: '...', //Shopify API Key
+  client_pass: '...' //Shopify API Password
+})
+```
+
 ## Kitchen sink
 
 ```js
-const { createClient } = require('@particular./shopify-request')
+const shopify = new createClient({
+    store_name: '...',
+    access_token: '...', 
+    application: '...',
+    headers: {
+        // ...
+    }
+})
+
+-OR- //access_token -OR- client_key AND client_pass
 
 const shopify = new createClient({
     store_name: '...',
-    client_key: '...',
+    client_key: '...', 
     client_pass: '...'
     application: '...',
     headers: {
@@ -90,12 +105,9 @@ By default this library will encode all data as JSON, however you can customise 
 **Note**: If you add the `Content-Type` custom header to `post`, `put` or `delete` you will need to encode `data` yourself.
 
 ```js
-const { createClient } = require('@particular./shopify-request')
-
 const shopify = new createClient({
     store_name: '...',
-    client_key: '...',
-    client_pass: '...'
+    access_token: '...'
 })
 
 const headers = {

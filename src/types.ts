@@ -1,7 +1,8 @@
 export interface InitOptions {
   store_name: string,
-  client_key: string,
-  client_pass: string,
+  access_token?: string,
+  client_key?: string,
+  client_pass?: string,
   fetch?: Fetch
   application?: string
   headers?: Headers
