@@ -10,66 +10,66 @@
 yarn add @particular./shopify-request # npm install @particular./shopify-request
 ```
 
-
 ## Quickstart (OAuth)
 
 ```js
-const { createClient } = require('@particular./shopify-request')
+const { createClient } = require('@particular./shopify-request');
 // import { createClient } from '@particular./shopify-request'
 
 const shopify = new createClient({
-  store_name: '...',  //Shopify Store Name
-  access_token: '...'  //Shopify OAuth token received after registering as Public App and installing to Store
-})
+  store_name: '...', //Shopify Store Name
+  admin_access_token: '...', //Shopify OAuth token received after registering as Public App and installing to Store
+  storefront_access_token: '...' //Shopify OAuth token received after using admin_access_token to call 'admin/storefront_access_tokens.json'
+});
 
 shopify
-    .delete('admin/products/:product_id.json')
-    .then(console.log)
-    .catch(console.error)
-
-
-shopify
-    .get('admin/products.json')
-    .then(console.log)
-    .catch(console.error)
+  .delete('admin/products/:product_id.json')
+  .then(console.log)
+  .catch(console.error);
 
 shopify
-    .post('admin/products.json', {
-        product: {
-            title: 'My Product',
-            body_html: '<strong>It\'s great!</strong>',
-            variants: [
-                {
-                    option1: 'S',
-                    price: '10.00',
-                    sku: '123'
-                }
-            ]
+  .get('admin/products.json')
+  .then(console.log)
+  .catch(console.error);
+
+shopify
+  .post('admin/products.json', {
+    product: {
+      title: 'My Product',
+      body_html: "<strong>It's great!</strong>",
+      variants: [
+        {
+          option1: 'S',
+          price: '10.00',
+          sku: '123'
         }
-    })
-    .then(console.log)
-    .catch(console.error)
+      ]
+    }
+  })
+  .then(console.log)
+  .catch(console.error);
 
 shopify
-    .put('admin/products/:product_id.json', {
-        product: {
-            id: 632910392,
-            tags: 'tag 1, tag 2, tag 3'
-        }
-    })
-    .then(console.log)
-    .catch(console.error)
+  .put('admin/products/:product_id.json', {
+    product: {
+      id: 632910392,
+      tags: 'tag 1, tag 2, tag 3'
+    }
+  })
+  .then(console.log)
+  .catch(console.error);
 ```
 
 ## Quickstart (Basic Auth)
+
 **_NOTE: This should not be used in production as it passes `client_pass` in base64 encoded clear text using basic auth._**
 
 ```js
 const shopify = new createClient({
-  store_name: '...',  //Shopify Store Name
+  store_name: '...', //Shopify Store Name
   client_key: '...', //Shopify API Key
   client_pass: '...' //Shopify API Password
-})
+});
 ```
 
 ## Kitchen sink
@@ -77,18 +77,19 @@ const shopify = new createClient({
 ```js
 const shopify = new createClient({
     store_name: '...',
-    access_token: '...', 
+    admin_access_token: '...',
+    storefront_access_token: '...',
     application: '...',
     headers: {
         // ...
     }
 })
 
--OR- //access_token -OR- client_key AND client_pass
+-OR- //access_token (above) -OR- client_key AND client_pass BUT INSECURE (below)
 
 const shopify = new createClient({
     store_name: '...',
-    client_key: '...', 
+    client_key: '...',
     client_pass: '...'
     application: '...',
     headers: {
@@ -107,18 +108,19 @@ By default this library will encode all data as JSON, however you can customise 
 
 ```js
 const shopify = new createClient({
-    store_name: '...',
-    access_token: '...'
-})
+  store_name: '...',
+  admin_access_token: '...',
+  storefront_access_token: '...'
+});
 
 const headers = {
   'X-My-Header': 'custom'
-}
+};
 
 shopify
-    .get('admin/products.json', headers)
-    .then(console.log)
-    .catch(console.error)
+  .get('admin/products.json', headers)
+  .then(console.log)
+  .catch(console.error);
 ```
 
 _Contact [Adam Grohs](https://www.linkedin.com/in/adamgrohs/) @ [Particular.](https://uniquelyparticular.com) for any questions._
