@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: 'circleci/node:latest'
+      - image: 'circleci/node:lts'
     steps:
       - checkout
       - run: yarn
@@ -13,7 +13,7 @@ jobs:
           key: shopify-request-{{ checksum "package.json" }}
   test:
     docker:
-      - image: 'circleci/node:latest'
+      - image: 'circleci/node:lts'
     steps:
       - checkout
       - restore_cache:
@@ -23,7 +23,7 @@ jobs:
       - run: yarn test
   release:
     docker:
-      - image: 'circleci/node:latest'
+      - image: 'circleci/node:lts'
     steps:
       - checkout
       - restore_cache:
@@ -42,7 +42,7 @@ workflows:
       - release:
           filters:
             branches:
-              only: 
+              only:
                 - master
           requires:
             - test
