@@ -25,7 +25,7 @@
   "scripts": {
     "build": "yarn clean && tsc -d",
     "clean": "rimraf dist",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "semantic-release": "semantic-release"
   },
   "husky": {

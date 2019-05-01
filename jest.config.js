@@ -1,10 +1,7 @@
 module.exports = {
-  roots: ['<rootDir>/src'],
+  roots: ['<rootDir>/src', '<rootDir>/tests', '<rootDir>/spec'],
   transform: {
-    '^.+\\.tsx?$': 'ts-jest'
+    '^.+\\.ts(x)?$': 'ts-jest'
   },
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  verbose: true,
-  testURL: 'http://localhost/'
-}
+  verbose: true
+};
