@@ -112,6 +112,10 @@ export class createClient {
     return this.request('GET', path, undefined, headers);
   }
 
+  patch(path: string, data: object, headers?: Headers) {
+    return this.request('PATCH', path, data, headers);
+  }
+
   put(path: string, data: object, headers?: Headers) {
     return this.request('PUT', path, data, headers);
   }
