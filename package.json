@@ -25,6 +25,7 @@
   "scripts": {
     "build": "yarn clean && tsc -d",
     "clean": "rimraf dist",
+    "clean-install": "yarn clean; yarn install --force",
     "test": "jest --passWithNoTests",
     "semantic-release": "semantic-release"
   },
