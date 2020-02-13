@@ -84,15 +84,16 @@ export class createClient {
 
     if (response.status === 204) return response.text();
 
+    const json = await response.json();
+
     if (response.status >= 400)
       throw {
         statusCode: response.status,
         body: {
-          message: response.statusText
+          message: response.statusText,
+          ...json
         }
       };
-
-    const json = await response.json();
 
     if (!response.ok) {
       throw {
